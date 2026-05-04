@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Booking SaaS · Evan Mendyk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="project-shared.css">
+</head>
+<body>
+  <nav class="proj-nav">
+    <div class="container">
+      <a href="../index.html" class="back-link">← Back to Portfolio</a>
+      <div class="nav-logo">EM<span class="dot">.</span></div>
+    </div>
+  </nav>
+
+  <section class="proj-hero">
+    <div class="container">
+      <div class="proj-category">AI & AUTOMATION · FEATURED PROJECT</div>
+      <h1 class="proj-title">AI-Powered Service Booking <span class="gradient-text">SaaS Platform</span></h1>
+      <p class="proj-subtitle">Designed, built, and deployed a multi-tenant SaaS platform from zero, enabling service businesses to automate bookings via AI SMS conversations, manage clients, and collect payments — all without a single manual intervention.</p>
+      <div class="proj-meta">
+        <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Founder / Full-Stack Builder</span></div>
+        <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value">Live in Production</span></div>
+        <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">Python · FastAPI · PostgreSQL · Twilio</span></div>
+        <div class="meta-item"><span class="meta-label">Type</span><span class="meta-value">SaaS · AI Automation</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="proj-content">
+    <div class="container">
+      <div class="proj-section">
+        <h2>📌 The Problem</h2>
+        <p>Small service businesses — HVAC, plumbing, landscaping — lose revenue every week because after-hours booking calls go unanswered. Hiring a receptionist is expensive. Existing software is bloated, complex, and built for enterprise.</p>
+        <p>I saw an opportunity: deploy an AI agent that handles the entire booking conversation via SMS, so business owners never miss a lead, even at 2am.</p>
+      </div>
+
+      <div class="proj-section">
+        <h2>🏗️ What I Built</h2>
+        <ul>
+          <li>An AI SMS agent that conducts natural booking conversations, collects job details, and confirms appointments without human involvement</li>
+          <li>Multi-tenant architecture supporting multiple clients with isolated data, per-client branding (colors, logo, service menus), and custom domains</li>
+          <li>Stripe integration for subscription billing and in-booking payment collection</li>
+          <li>FastAPI backend deployed to Railway with a PostgreSQL database for persistent client, booking, and conversation data</li>
+          <li>A client-facing marketing site with a tiered pricing page and live booking widget</li>
+        </ul>
+      </div>
+
+      <div class="proj-section">
+        <h2>📊 Outcomes</h2>
+        <div class="outcomes-grid">
+          <div class="outcome-card">
+            <div class="outcome-num">100%</div>
+            <div class="outcome-label">Automated booking flow — zero human touchpoints</div>
+          </div>
+          <div class="outcome-card">
+            <div class="outcome-num">Live</div>
+            <div class="outcome-label">Deployed to production with paying clients</div>
+          </div>
+          <div class="outcome-card">
+            <div class="outcome-num">Multi</div>
+            <div class="outcome-label">Tenant architecture supporting N clients from day 1</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-section">
+        <h2>🔧 Sample Architecture</h2>
+        <div class="code-block">
+<span class="code-comment"># Simplified booking agent flow</span>
+<span class="code-keyword">async def</span> <span class="code-func">handle_sms</span>(incoming: SMSPayload):
+    session = <span class="code-func">get_or_create_session</span>(incoming.from_number)
+    
+    <span class="code-keyword">if</span> session.state == <span class="code-string">"awaiting_service"</span>:
+        service = <span class="code-func">extract_service_intent</span>(incoming.body)  <span class="code-comment"># AI NLP</span>
+        session.service = service
+        <span class="code-keyword">return</span> <span class="code-func">ask_for_datetime</span>(session.client_config)
+    
+    <span class="code-keyword">elif</span> session.state == <span class="code-string">"awaiting_datetime"</span>:
+        dt = <span class="code-func">parse_natural_datetime</span>(incoming.body)
+        booking = <span class="code-func">create_booking</span>(session, dt)
+        <span class="code-func">notify_business_owner</span>(booking)
+        <span class="code-keyword">return</span> <span class="code-func">confirm_booking_sms</span>(booking)
+        </div>
+      </div>
+
+      <div class="proj-section">
+        <h2>🛠️ Technologies Used</h2>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">FastAPI</span><span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Twilio SMS</span><span class="tech-tag">Stripe API</span><span class="tech-tag">Railway</span>
+          <span class="tech-tag">AI Prompt Engineering</span><span class="tech-tag">Multi-tenant SaaS</span>
+          <span class="tech-tag">RESTful API Design</span><span class="tech-tag">HTML/CSS/JS</span>
+        </div>
+      </div>
+
+      <div class="proj-section">
+        <h2>💡 Key Learnings</h2>
+        <ul>
+          <li>Building for non-technical clients means obsessing over the onboarding experience — the AI only works if the business data is set up correctly</li>
+          <li>SMS compliance (A2P 10DLC / TCPA) is a critical business constraint that requires deep understanding of carrier regulations</li>
+          <li>Multi-tenancy requires architectural decisions made at day 1 — retrofitting it later is painful</li>
+          <li>The best product insight came from talking directly with service business owners, not building in isolation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="proj-footer">
+    <div class="container">
+      <a href="../index.html#projects" class="btn-ghost">← All Projects</a>
+      <a href="../index.html#contact" class="btn-primary">Let's Connect</a>
+    </div>
+  </footer>
+</body>
+</html>
